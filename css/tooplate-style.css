@@ -121,6 +121,7 @@ b, strong {
   top: 0;
   right: 0;
   left: 0;
+  width: 100%;
   animation: BottomTotop 4s linear infinite 0s;
 }
 .animated-item:nth-child(2n+2) {
@@ -511,7 +512,7 @@ footer{
 }
 @media (max-width: 580px) {
 	.animated-info {
-		min-width: 200px;
+		min-width: 300px;
 	}
   .animated-item {
     font-size: 30px;
