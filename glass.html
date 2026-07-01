@@ -1,0 +1,51 @@
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg,
+                #667eea,
+                #764ba2,
+                #6dd5ed);
+
+    }
+
+    .glass-card {
+        width: 350px;
+        padding: 30px;
+
+        /* Glass effect */
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+
+        /* Border */
+        border: 1px solid rgba(255, 255, 255, 0.25);
+
+        /* Rounded corners */
+        border-radius: 16px;
+
+        /* Shadow */
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+
+        color: white;
+    }
+
+    .glass-dark {
+        background: rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+</style>
+
+<div class="glass-card glass-dark">
+    <h2>Glass Card</h2>
+    <p>This is a glassmorphism effect.</p>
+</div>

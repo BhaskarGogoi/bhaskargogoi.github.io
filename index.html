@@ -18,7 +18,7 @@
       --paper-dim: #9FB2C7;
       --accent: #E8823A;
       --accent-2: #5FB3B0;
-      --line: rgba(242, 236, 217, 0.14);
+      --line: rgba(242, 236, 217, 0.078);
       --line-strong: rgba(242, 236, 217, 0.32);
       --radius: 2px;
     }
@@ -227,6 +227,10 @@
     }
 
     @media(max-width:900px) {
+      .hero {
+        margin-top: 100px;
+      }
+
       .hero-grid {
         grid-template-columns: 1fr;
       }
@@ -328,6 +332,9 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       background: rgba(242, 236, 217, 0.02);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
     }
 
     .tb-row {
@@ -378,6 +385,7 @@
     }
 
     .scroll-cue {
+      margin-top: -100px !important;
       position: absolute;
       bottom: 24px;
       left: 32px;
@@ -558,6 +566,8 @@
     /* ---------- services (bill of materials) ---------- */
     .bom {
       border: 1px solid var(--line-strong);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .bom-row {
@@ -807,6 +817,9 @@
 
     .build-body {
       padding: 30px 30px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
     }
 
     .build h3 {
