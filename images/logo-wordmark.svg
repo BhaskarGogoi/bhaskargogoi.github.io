@@ -1,0 +1,20 @@
+<svg viewBox="0 0 460 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bhaskar Gogoi — Software Developer">
+  <!-- icon badge -->
+  <g>
+    <rect x="4" y="10" width="80" height="80" rx="14" fill="#0E2A47" stroke="#F2ECD9" stroke-width="1.6"/>
+    <line x1="18" y1="50" x2="70" y2="50" stroke="#F2ECD9" stroke-opacity="0.28" stroke-width="1"/>
+    <line x1="44" y1="24" x2="44" y2="76" stroke="#F2ECD9" stroke-opacity="0.28" stroke-width="1"/>
+    <g stroke="#F2ECD9" stroke-width="1.5" stroke-linecap="square">
+      <path d="M9,15 L16,15 M9,15 L9,22"/>
+      <path d="M79,15 L72,15 M79,15 L79,22"/>
+      <path d="M9,85 L16,85 M9,85 L9,78"/>
+      <path d="M79,85 L72,85 M79,85 L79,78"/>
+    </g>
+    <circle cx="64" cy="28" r="3" fill="#E8823A"/>
+    <text x="44" y="61" text-anchor="middle" font-family="'Space Grotesk', 'DejaVu Sans', sans-serif" font-weight="700" font-size="32" fill="#F2ECD9">BG</text>
+  </g>
+
+  <!-- wordmark -->
+  <text x="102" y="52" font-family="'Space Grotesk', 'DejaVu Sans', sans-serif" font-weight="600" font-size="30" letter-spacing="0.3" fill="#0E2A47">BHASKAR GOGOI</text>
+  <text x="103" y="74" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-weight="500" font-size="12.5" letter-spacing="1.2" fill="#5FB3B0">SOFTWARE DEVELOPER · FREELANCE</text>
+</svg>
