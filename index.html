@@ -7,23 +7,20 @@
   <title>Bhaskar Gogoi — Software Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
-    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet">
   <style>
     :root {
-      --bg: #F6EFE1;
-      --bg-2: #EDE3CE;
-      --paper: #FFFCF6;
-      --chrome: #201F1C;
-      --chrome-soft: #2B2A26;
-      --text: #201F1C;
-      --text-dim: #7C7361;
-      --accent: #FF5A36;
-      --accent-2: #2F6FED;
-      --green: #28C840;
-      --yellow: #FFBD2E;
-      --red: #FF5F57;
-      --line: rgba(32, 31, 28, 0.13);
+      --ink: #0E2A47;
+      --ink-2: #123659;
+      --ink-3: #0A2138;
+      --paper: #F2ECD9;
+      --paper-dim: #9FB2C7;
+      --accent: #E8823A;
+      --accent-2: #5FB3B0;
+      --line: rgba(242, 236, 217, 0.14);
+      --line-strong: rgba(242, 236, 217, 0.32);
+      --radius: 2px;
     }
 
     * {
@@ -37,12 +34,20 @@
     }
 
     body {
-      background: var(--bg);
-      color: var(--text);
+      background: var(--ink);
+      color: var(--paper);
       font-family: 'Inter', sans-serif;
-      line-height: 1.55;
+      line-height: 1.5;
       overflow-x: hidden;
-      position: relative;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--ink-3);
     }
 
     a {
@@ -55,14 +60,10 @@
     }
 
     .display {
-      font-family: 'Sora', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
     }
 
-    ::selection {
-      background: var(--accent);
-      color: #fff;
-    }
-
+    /* focus visibility */
     a:focus-visible,
     button:focus-visible {
       outline: 2px solid var(--accent-2);
@@ -76,278 +77,235 @@
       }
     }
 
-    /* wallpaper blobs */
-    .wallpaper {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(70px);
-      opacity: 0.35;
-    }
-
-    .blob.b1 {
-      width: 520px;
-      height: 520px;
-      background: var(--accent-2);
-      top: -150px;
-      left: -150px;
-    }
-
-    .blob.b2 {
-      width: 460px;
-      height: 460px;
-      background: var(--accent);
-      top: 40%;
-      right: -180px;
-    }
-
-    .blob.b3 {
-      width: 380px;
-      height: 380px;
-      background: var(--yellow);
-      bottom: -160px;
-      left: 20%;
-      opacity: 0.25;
-    }
-
     .wrap {
       max-width: 1180px;
       margin: 0 auto;
-      padding: 0 28px;
-      position: relative;
-      z-index: 1;
+      padding: 0 32px;
     }
 
-    /* ---------- fake macOS menu bar ---------- */
-    .menubar {
+    /* ---------- corner ticks (blueprint registration marks) ---------- */
+    .ticked {
+      position: relative;
+    }
+
+    .ticked::before,
+    .ticked::after,
+    .ticked .tick-br,
+    .ticked .tick-bl {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-color: var(--line-strong);
+    }
+
+    .ticked::before {
+      top: -1px;
+      left: -1px;
+      border-top: 1px solid var(--line-strong);
+      border-left: 1px solid var(--line-strong);
+    }
+
+    .ticked::after {
+      top: -1px;
+      right: -1px;
+      border-top: 1px solid var(--line-strong);
+      border-right: 1px solid var(--line-strong);
+    }
+
+    .ticked .tick-bl {
+      bottom: -1px;
+      left: -1px;
+      border-bottom: 1px solid var(--line-strong);
+      border-left: 1px solid var(--line-strong);
+    }
+
+    .ticked .tick-br {
+      bottom: -1px;
+      right: -1px;
+      border-bottom: 1px solid var(--line-strong);
+      border-right: 1px solid var(--line-strong);
+    }
+
+    /* ---------- nav ---------- */
+    header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 200;
-      background: rgba(32, 31, 28, 0.92);
-      backdrop-filter: blur(8px);
-      color: #EDE9DE;
+      z-index: 100;
+      background: rgba(14, 42, 71, 0.85);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line-strong);
     }
 
-    .menubar-inner {
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
       max-width: 1180px;
       margin: 0 auto;
-      padding: 0 28px;
-      display: flex;
-      align-items: center;
-      height: 42px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12.5px;
     }
 
-    .menubar .brandmark {
+    .brand {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-right: 26px;
-      font-weight: 700;
+      gap: 10px;
+      font-size: 15px;
+      letter-spacing: 0.02em;
     }
 
-    .menubar .brandmark .sq {
-      width: 9px;
-      height: 9px;
+    .brand .dot {
+      width: 8px;
+      height: 8px;
       background: var(--accent);
-      border-radius: 2px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(232, 130, 58, 0.2);
     }
 
-    .menu-items {
+    .navlinks {
       display: flex;
-      gap: 22px;
-      flex: 1;
+      gap: 28px;
+      font-size: 12.5px;
+      letter-spacing: 0.06em;
     }
 
-    .menu-items a {
-      color: #B9B2A0;
-      transition: color .15s;
+    .navlinks a {
+      color: var(--paper-dim);
+      position: relative;
+      padding-bottom: 4px;
+      transition: color .2s;
     }
 
-    .menu-items a:hover {
-      color: #fff;
+    .navlinks a:hover {
+      color: var(--paper);
     }
 
-    .menubar-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      color: #B9B2A0;
+    .navlinks a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width .25s;
+    }
+
+    .navlinks a:hover::after {
+      width: 100%;
+    }
+
+    .navlinks .code {
+      color: var(--accent-2);
+      margin-right: 6px;
     }
 
     @media(max-width:720px) {
-      .menu-items {
+      .navlinks {
         display: none;
       }
     }
 
-    /* ---------- desktop hero ---------- */
-    .desktop {
-      padding-top: 110px;
-      padding-bottom: 70px;
+    /* ---------- hero ---------- */
+    .hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      padding-top: 110px;
+      padding-bottom: 60px;
+      position: relative;
     }
 
-    .window {
-      background: var(--paper);
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      box-shadow: 0 30px 60px -20px rgba(32, 31, 28, 0.25), 0 2px 6px rgba(32, 31, 28, 0.08);
-      overflow: hidden;
-      transition: transform .35s ease, box-shadow .35s ease;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 48px;
+      align-items: start;
     }
 
-    .window.tilt-l {
-      transform: rotate(-1.1deg);
-    }
-
-    .window.tilt-r {
-      transform: rotate(0.9deg);
-    }
-
-    .window.tilt-l:hover,
-    .window.tilt-r:hover {
-      transform: rotate(0deg) translateY(-3px);
-      box-shadow: 0 40px 70px -20px rgba(32, 31, 28, 0.3);
-    }
-
-    .winbar {
-      background: var(--chrome);
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .winbar .dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-    }
-
-    .winbar .dot.r {
-      background: var(--red);
-    }
-
-    .winbar .dot.y {
-      background: var(--yellow);
-    }
-
-    .winbar .dot.g {
-      background: var(--green);
-    }
-
-    .winbar .wtitle {
-      margin: 0 auto;
-      color: #9C9689;
-      font-size: 11.5px;
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 0.02em;
-    }
-
-    .winbar .spacer {
-      width: 11px;
-    }
-
-    .win-body {
-      padding: 34px;
-    }
-
-    .win-body.dark {
-      background: var(--chrome-soft);
-      color: #D8D3C4;
-      padding: 26px;
-    }
-
-    /* hero window content */
-    .hero-window {
-      max-width: 760px;
-      margin: 0 auto 26px;
+    @media(max-width:900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .eyebrow {
-      font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
+      letter-spacing: 0.12em;
       color: var(--accent-2);
-      letter-spacing: 0.05em;
-      margin-bottom: 16px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      margin-bottom: 22px;
     }
 
-    .eyebrow::before {
-      content: '●';
-      color: var(--green);
-      font-size: 9px;
+    .eyebrow .rule {
+      width: 36px;
+      height: 1px;
+      background: var(--accent-2);
     }
 
     h1.name {
-      font-size: clamp(38px, 6vw, 66px);
-      font-weight: 800;
-      line-height: 1.03;
-      margin-bottom: 16px;
+      font-size: clamp(44px, 7vw, 88px);
+      font-weight: 600;
+      line-height: 0.98;
       letter-spacing: -0.01em;
+      margin-bottom: 18px;
     }
 
     h1.name .accentword {
       color: var(--accent);
+      font-style: normal;
     }
 
     .role-line {
-      color: var(--text-dim);
-      font-size: 16.5px;
-      max-width: 560px;
-      margin-bottom: 26px;
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--paper-dim);
+      max-width: 520px;
+      margin-bottom: 28px;
+      font-weight: 400;
     }
 
     .role-line b {
-      color: var(--text);
+      color: var(--paper);
       font-weight: 600;
     }
 
     .cta-row {
       display: flex;
-      gap: 14px;
+      gap: 16px;
       flex-wrap: wrap;
+      margin-bottom: 10px;
     }
 
     .btn {
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
-      padding: 13px 20px;
-      border-radius: 8px;
-      border: 1.5px solid var(--chrome);
+      letter-spacing: 0.03em;
+      padding: 14px 22px;
+      border: 1px solid var(--line-strong);
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      transition: all .18s;
-      cursor: pointer;
+      gap: 10px;
+      transition: all .2s;
       background: transparent;
-      color: var(--text);
+      color: var(--paper);
+      cursor: pointer;
     }
 
     .btn.solid {
-      background: var(--chrome);
-      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--ink-3);
+      font-weight: 600;
     }
 
     .btn.solid:hover {
-      background: var(--accent);
-      border-color: var(--accent);
+      background: var(--paper);
+      border-color: var(--paper);
     }
 
     .btn.ghost:hover {
@@ -356,81 +314,167 @@
     }
 
     .btn .arrow {
-      transition: transform .18s;
+      transition: transform .2s;
     }
 
     .btn:hover .arrow {
       transform: translateX(3px);
     }
 
-    /* terminal skills preview under hero */
-    .term-mini {
-      max-width: 760px;
-      margin: 0 auto;
+    /* title block - the signature element */
+    .titleblock {
+      border: 1px solid var(--line-strong);
+      padding: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      background: rgba(242, 236, 217, 0.02);
     }
 
-    .term-line {
+    .tb-row {
       display: flex;
-      gap: 10px;
+      border-bottom: 1px solid var(--line-strong);
     }
 
-    .term-prompt {
+    .tb-row:last-child {
+      border-bottom: none;
+    }
+
+    .tb-cell {
+      padding: 12px 14px;
+      flex: 1;
+      border-right: 1px solid var(--line-strong);
+    }
+
+    .tb-cell:last-child {
+      border-right: none;
+    }
+
+    .tb-label {
+      color: var(--paper-dim);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .tb-value {
+      color: var(--paper);
+      font-size: 13px;
+    }
+
+    .tb-value.accent {
       color: var(--accent);
     }
 
-    .term-line .out {
-      color: #8FE39A;
+    .tb-title {
+      padding: 16px 14px;
+      border-bottom: 1px solid var(--line-strong);
     }
 
-    .term-line .key {
-      color: #7FB3FF;
+    .tb-title .tb-value {
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
     }
 
     .scroll-cue {
-      text-align: center;
-      margin-top: 34px;
+      position: absolute;
+      bottom: 24px;
+      left: 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      color: var(--text-dim);
-      letter-spacing: 0.06em;
+      color: var(--paper-dim);
+      letter-spacing: 0.08em;
     }
 
-    /* ---------- sections ---------- */
+    .scroll-cue .line {
+      width: 1px;
+      height: 28px;
+      background: var(--line-strong);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-cue .line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--accent-2);
+      animation: drip 2.2s ease-in-out infinite;
+    }
+
+    @keyframes drip {
+      0% {
+        top: -100%;
+      }
+
+      100% {
+        top: 100%;
+      }
+    }
+
+    @media(max-width:720px) {
+      .scroll-cue {
+        display: none;
+      }
+    }
+
+    /* ---------- section framing ---------- */
     section {
-      padding: 110px 0;
+      padding: 120px 0;
+      position: relative;
+      border-top: 1px solid var(--line);
     }
 
     .sec-head {
-      margin-bottom: 52px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     .sec-code {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       color: var(--accent-2);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
       display: block;
-      margin-bottom: 12px;
     }
 
     .sec-title {
-      font-family: 'Sora', sans-serif;
-      font-weight: 800;
-      font-size: clamp(28px, 4vw, 42px);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: 600;
       letter-spacing: -0.01em;
     }
 
-    .sec-sub {
-      color: var(--text-dim);
-      max-width: 520px;
-      margin-top: 12px;
-      font-size: 15px;
+    .sec-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--paper-dim);
+      max-width: 280px;
+      text-align: right;
+    }
+
+    @media(max-width:720px) {
+      .sec-note {
+        text-align: left;
+      }
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(16px);
-      transition: opacity .55s ease, transform .55s ease;
+      transform: translateY(18px);
+      transition: opacity .6s ease, transform .6s ease;
     }
 
     .reveal.in {
@@ -438,357 +482,506 @@
       transform: translateY(0);
     }
 
-    /* stack terminal window (full) */
-    .stack-window {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .stack-grid {
+    /* ---------- assemblies (skills) ---------- */
+    .assemblies {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-    }
-
-    @media(max-width:820px) {
-      .stack-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media(max-width:480px) {
-      .stack-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .stack-block .k {
-      color: #7FB3FF;
-    }
-
-    .stack-block .b {
-      color: #E7E2D2;
-    }
-
-    .stack-block ul {
-      list-style: none;
-      margin-top: 6px;
-    }
-
-    .stack-block li {
-      color: #8FE39A;
-      font-size: 13px;
-      padding: 2px 0;
-    }
-
-    .stack-block li::before {
-      content: '"';
-      color: #8FE39A;
-    }
-
-    .stack-block li::after {
-      content: '"';
-      color: #8FE39A;
-    }
-
-    /* launchpad / services window */
-    .launchpad {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .win-body.launchpad-bg {
-      background:
-        radial-gradient(circle at 15% 15%, rgba(255, 90, 54, 0.10), transparent 42%),
-        radial-gradient(circle at 85% 25%, rgba(47, 111, 237, 0.10), transparent 42%),
-        radial-gradient(circle at 50% 90%, rgba(255, 189, 46, 0.10), transparent 45%),
-        var(--paper);
-      padding: 44px 30px;
-    }
-
-    .launchpad-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 36px 18px;
-    }
-
-    @media(max-width:760px) {
-      .launchpad-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 28px 12px;
-      }
-    }
-
-    @media(max-width:480px) {
-      .launchpad-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    .launch-item {
-      text-align: center;
-    }
-
-    .app-icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 15px;
-      margin: 0 auto 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Sora', sans-serif;
-      font-weight: 800;
-      font-size: 20px;
-      color: #fff;
-      box-shadow: 0 10px 20px -6px rgba(32, 31, 28, 0.35);
-      transition: transform .18s ease;
-    }
-
-    .launch-item:hover .app-icon {
-      transform: translateY(-4px) scale(1.06);
-    }
-
-    .launch-item .lname {
-      font-weight: 700;
-      font-size: 13px;
-      margin-bottom: 5px;
-    }
-
-    .launch-item .ldesc {
-      font-size: 11.5px;
-      color: var(--text-dim);
-      line-height: 1.45;
-    }
-
-    /* finder / projects window */
-    .finder {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .finder-toolbar {
-      background: #EFEAE0;
-      padding: 8px 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border-bottom: 1px solid var(--line);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11.5px;
-      color: var(--text-dim);
-    }
-
-    .finder-toolbar .path {
-      margin-left: 6px;
-    }
-
-    .files {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
       gap: 1px;
-      background: var(--line);
+      background: var(--line-strong);
+      border: 1px solid var(--line-strong);
     }
 
-    @media(max-width:820px) {
-      .files {
+    @media(max-width:900px) {
+      .assemblies {
         grid-template-columns: repeat(2, 1fr);
       }
     }
 
     @media(max-width:520px) {
-      .files {
+      .assemblies {
         grid-template-columns: 1fr;
       }
     }
 
-    .file {
-      background: var(--paper);
-      padding: 26px 22px;
-      transition: background .2s;
+    .assembly {
+      background: var(--ink);
+      padding: 32px 26px;
       position: relative;
+      transition: background .25s;
     }
 
-    .file:hover {
-      background: #FBF6EA;
+    .assembly:hover {
+      background: var(--ink-2);
     }
 
-    .file .fname {
+    .assembly .idx {
       font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      font-size: 14.5px;
-      margin-bottom: 4px;
-    }
-
-    .file .fname .ext {
-      color: var(--accent);
-    }
-
-    .file .fcat {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
+      font-size: 11px;
       color: var(--accent-2);
-      letter-spacing: 0.05em;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
       display: block;
     }
 
-    .file p {
-      font-size: 13.5px;
-      color: var(--text-dim);
-      margin-bottom: 16px;
+    .assembly h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      margin-bottom: 6px;
     }
 
-    .file .ftags {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .file .tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      background: var(--bg-2);
-      padding: 3px 8px;
-      border-radius: 5px;
-      color: var(--text);
-    }
-
-    .file .fmeta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .assembly .sub {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      color: var(--text-dim);
-      border-top: 1px dashed var(--line);
-      padding-top: 12px;
+      color: var(--paper-dim);
+      margin-bottom: 20px;
     }
 
-    .file .fmeta a {
-      color: var(--accent);
+    .assembly ul {
+      list-style: none;
     }
 
-    /* process script window */
-    .script-window {
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .script-line {
-      display: flex;
-      gap: 12px;
-      padding: 9px 0;
+    .assembly li {
       font-size: 13.5px;
-      align-items: baseline;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--paper-dim);
+      padding: 7px 0;
+      border-top: 1px dashed var(--line);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .script-line:last-child {
+    .assembly li::before {
+      content: '—';
+      color: var(--accent);
+      font-size: 11px;
+    }
+
+    /* ---------- services (bill of materials) ---------- */
+    .bom {
+      border: 1px solid var(--line-strong);
+    }
+
+    .bom-row {
+      display: grid;
+      grid-template-columns: 90px 1fr 1fr 170px;
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .bom-row:last-child {
       border-bottom: none;
     }
 
-    .script-tag {
-      color: #7FB3FF;
-      width: 64px;
-      flex-shrink: 0;
+    .bom-row.head {
+      background: var(--ink-2);
     }
 
-    .script-name {
-      color: #E7E2D2;
+    .bom-row.head .bom-cell {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--accent-2);
+      padding: 12px 18px;
+    }
+
+    .bom-cell {
+      padding: 20px 18px;
+      border-right: 1px solid var(--line-strong);
+      display: flex;
+      align-items: center;
+    }
+
+    .bom-cell:last-child {
+      border-right: none;
+    }
+
+    .bom-row:not(.head):hover {
+      background: var(--ink-2);
+    }
+
+    .bom-item {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .bom-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .bom-desc {
+      color: var(--paper-dim);
+      font-size: 13.5px;
+    }
+
+    .bom-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent-2);
+      letter-spacing: 0.04em;
+    }
+
+    @media(max-width:820px) {
+      .bom-row {
+        grid-template-columns: 1fr;
+      }
+
+      .bom-row.head {
+        display: none;
+      }
+
+      .bom-cell {
+        border-right: none;
+        border-bottom: 1px dashed var(--line);
+        padding: 14px 18px;
+      }
+
+      .bom-cell:last-child {
+        border-bottom: none;
+      }
+    }
+
+    /* ---------- pricing ---------- */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line-strong);
+      border: 1px solid var(--line-strong);
+    }
+
+    @media(max-width:900px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .price-card {
+      background: var(--ink);
+      padding: 34px 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .price-card.featured {
+      background: var(--ink-2);
+    }
+
+    .price-featured-tag {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: var(--accent);
+      color: var(--ink-3);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      padding: 5px 10px;
+    }
+
+    .price-tier {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent-2);
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    .price-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .price-amount {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 32px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .price-amount .unit {
+      font-size: 12px;
+      color: var(--paper-dim);
+      font-weight: 400;
+      margin-left: 4px;
+    }
+
+    .price-desc {
+      color: var(--paper-dim);
+      font-size: 13.5px;
+      margin-bottom: 22px;
+    }
+
+    .price-list {
+      list-style: none;
+      margin-bottom: 28px;
       flex: 1;
     }
 
-    .script-status {
-      color: #8FE39A;
-    }
-
-    .script-status.running {
-      color: var(--yellow);
-    }
-
-    .script-status.queued {
-      color: #8A8474;
-    }
-
-    .script-desc {
-      color: #8A8474;
-      font-size: 12px;
-      display: block;
-      margin-top: 2px;
-    }
-
-    /* contact mail window */
-    .mail-window {
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .mail-fields {
-      border-bottom: 1px solid var(--line);
-    }
-
-    .mail-field {
+    .price-list li {
+      font-size: 13px;
+      padding: 9px 0;
+      border-top: 1px dashed var(--line);
       display: flex;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--line);
+      gap: 8px;
+      color: var(--paper-dim);
+    }
+
+    .price-list li::before {
+      content: '✓';
+      color: var(--accent-2);
+      flex-shrink: 0;
+    }
+
+    .price-cta {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .pricing-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--paper-dim);
+      text-align: center;
+      margin-top: 26px;
+      line-height: 1.7;
+    }
+
+    /* ---------- builds (projects) ---------- */
+    .builds {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .build {
+      border: 1px solid var(--line-strong);
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      position: relative;
+    }
+
+    @media(max-width:760px) {
+      .build {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .build-tag {
+      background: var(--ink-2);
+      padding: 26px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--line-strong);
+    }
+
+    @media(max-width:760px) {
+      .build-tag {
+        border-right: none;
+        border-bottom: 1px solid var(--line-strong);
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .build-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 34px;
+      color: var(--line-strong);
+      font-weight: 600;
+    }
+
+    .build-cat {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--accent-2);
+    }
+
+    .build-body {
+      padding: 30px 30px;
+    }
+
+    .build h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .build p {
+      color: var(--paper-dim);
+      font-size: 14.5px;
+      max-width: 640px;
+      margin-bottom: 20px;
+    }
+
+    .stackline {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--paper);
+      border: 1px solid var(--line-strong);
+      padding: 5px 10px;
+      letter-spacing: 0.02em;
+    }
+
+    .build-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px dashed var(--line);
+    }
+
+    .build-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .build-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--paper-dim);
+    }
+
+    /* ---------- process ruler ---------- */
+    .ruler {
+      position: relative;
+      padding-top: 20px;
+    }
+
+    .ruler-line {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--line-strong);
+    }
+
+    .ruler-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      position: relative;
+    }
+
+    @media(max-width:760px) {
+      .ruler-steps {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .ruler-line {
+        display: none;
+      }
+    }
+
+    .rstep {
+      position: relative;
+      padding-top: 26px;
+      padding-right: 20px;
+    }
+
+    .rstep::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 0;
+      width: 1px;
+      height: 18px;
+      background: var(--accent);
+    }
+
+    @media(max-width:760px) {
+      .rstep::before {
+        display: none;
+      }
+    }
+
+    .rstep .rnum {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .rstep h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+
+    .rstep p {
+      color: var(--paper-dim);
+      font-size: 13.5px;
+    }
+
+    /* ---------- contact / title block footer ---------- */
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    @media(max-width:900px) {
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-copy h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.1;
+      margin-bottom: 22px;
+    }
+
+    .contact-copy p {
+      color: var(--paper-dim);
+      max-width: 440px;
+      margin-bottom: 30px;
+      font-size: 15px;
+    }
+
+    .clist {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .crow {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
     }
 
-    .mail-field .flabel {
-      width: 70px;
-      color: var(--text-dim);
-      flex-shrink: 0;
+    .crow:last-child {
+      border-bottom: 1px solid var(--line);
     }
 
-    .mail-field .fval {
-      color: var(--text);
-    }
-
-    .mail-body-text {
-      padding: 22px 0;
-      color: var(--text-dim);
-      font-size: 14.5px;
-    }
-
-    .mail-send {
-      display: flex;
-      justify-content: flex-end;
-      padding-top: 10px;
-    }
-
-    .contact-rows {
-      max-width: 760px;
-      margin: 20px auto 0;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    @media(max-width:600px) {
-      .contact-rows {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .crow {
-      background: var(--paper);
-      padding: 16px 20px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12.5px;
-    }
-
-    .crow .clabel {
-      color: var(--text-dim);
-      display: block;
-      margin-bottom: 4px;
-      font-size: 10.5px;
+    .crow span:first-child {
+      color: var(--paper-dim);
       letter-spacing: 0.05em;
     }
 
@@ -796,168 +989,162 @@
       color: var(--accent);
     }
 
-    /* dock */
-    .dock {
-      position: fixed;
-      bottom: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 200;
-      background: rgba(32, 31, 28, 0.85);
-      backdrop-filter: blur(10px);
-      border-radius: 18px;
-      padding: 8px 10px;
-      display: flex;
-      gap: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .dock a {
-      width: 42px;
-      height: 42px;
-      border-radius: 11px;
-      background: rgba(255, 255, 255, 0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #EDE9DE;
-      font-family: 'Sora', sans-serif;
-      font-weight: 700;
-      font-size: 15px;
-      transition: transform .18s ease, background .18s ease;
-    }
-
-    .dock a:hover {
-      transform: translateY(-6px) scale(1.08);
-      background: var(--accent);
-      color: #fff;
-    }
-
-    @media(max-width:600px) {
-      .dock a {
-        width: 36px;
-        height: 36px;
-        font-size: 12px;
-      }
-    }
-
     footer {
-      padding: 30px 0 90px;
-      text-align: center;
+      border-top: 1px solid var(--line-strong);
+      padding: 26px 0;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      color: var(--text-dim);
+      color: var(--paper-dim);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="wallpaper">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
-  </div>
-
-  <div class="menubar">
-    <div class="menubar-inner">
-      <div class="brandmark"><span class="sq"></span>bhaskar.gogoi</div>
-      <div class="menu-items">
-        <a href="#stack">Stack</a>
-        <a href="#services">Services</a>
-        <a href="#builds">Builds</a>
-        <a href="#process">Process</a>
-        <a href="#contact">Contact</a>
+  <header>
+    <nav>
+      <div class="brand">
+        <span class="dot"></span>
+        <span class="mono"><a href="https://bhaskargogoi.com">B. GOGOI / DEV</a></span>
       </div>
-      <div class="menubar-right">
-        <span id="clock">00:00</span>
-        <span>IST</span>
+      <div class="navlinks">
+        <a href="#stack"><span class="code">01</span>STACK</a>
+        <a href="#services"><span class="code">02</span>SERVICES</a>
+        <a href="#builds"><span class="code">03</span>BUILDS</a>
+        <a href="#process"><span class="code">04</span>PROCESS</a>
+        <!-- <a href="#pricing"><span class="code">05</span>PRICING</a> -->
+        <a href="#contact"><span class="code">05</span>CONTACT</a>
       </div>
-    </div>
-  </div>
+    </nav>
+  </header>
 
   <main class="wrap">
 
-    <div class="desktop">
-      <div class="window tilt-l hero-window">
-        <div class="winbar">
-          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-          <span class="wtitle">intro.app — running</span>
-          <span class="spacer"></span>
-        </div>
-        <div class="win-body">
-          <div class="eyebrow">AVAILABLE FOR FREELANCE WORK</div>
-          <h1 class="name display">Bhaskar Gogoi<span class="accentword">.</span></h1>
-          <p class="role-line">Software developer who builds <b>web apps</b>, <b>Android apps</b>, <b>backend
-              systems</b>, and <b>WordPress sites</b> </p>
+    <!-- HERO -->
+    <section class="hero" style="border-top:none;padding-top:0;">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow"><span class="rule"></span>SOFTWARE DEVELOPER · FREELANCE</div>
+          <h1 class="name display">Bhaskar<br>Gogoi<span class="accentword">.</span></h1>
+          <p class="role-line">I design and build <b>web apps</b>, <b>Android apps</b>, <b>backend systems</b>, and
+            <b>WordPress sites</b> — end to end, for startups and small teams who need one person who can ship the whole
+            thing.
+          </p>
           <div class="cta-row">
-            <a href="#contact" class="btn solid">Say hello <span class="arrow">→</span></a>
-            <a href="#builds" class="btn ghost">See builds <span class="arrow">→</span></a>
+            <a href="#contact" class="btn solid">START A PROJECT <span class="arrow">→</span></a>
+            <a href="#builds" class="btn ghost">VIEW BUILDS <span class="arrow">→</span></a>
+          </div>
+        </div>
+
+        <div class="titleblock ticked">
+          <span class="tick-bl"></span><span class="tick-br"></span>
+          <div class="tb-title">
+            <span class="tb-label">DRAWING TITLE</span>
+            <span class="tb-value">Developer Profile — Full Stack</span>
+          </div>
+          <div class="tb-row">
+            <div class="tb-cell">
+              <span class="tb-label">SCALE</span>
+              <span class="tb-value">1:1 — NO SHORTCUTS</span>
+            </div>
+            <div class="tb-cell">
+              <span class="tb-label">SHEET NO.</span>
+              <span class="tb-value accent">01 / 01</span>
+            </div>
+          </div>
+          <div class="tb-row">
+            <div class="tb-cell">
+              <span class="tb-label">EXPERIENCE</span>
+              <span class="tb-value">5+ YEARS</span>
+            </div>
+            <div class="tb-cell">
+              <span class="tb-label">BASED IN</span>
+              <span class="tb-value">INDIA (REMOTE)</span>
+            </div>
+          </div>
+          <div class="tb-row">
+            <div class="tb-cell">
+              <span class="tb-label">STACKS</span>
+              <span class="tb-value">FRONTEND / BACKEND / ANDROID / WORDPRESS</span>
+            </div>
+          </div>
+          <div class="tb-row">
+            <div class="tb-cell">
+              <span class="tb-label">STATUS</span>
+              <span style="color: #5fd297">● AVAILABLE FOR WORK</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="scroll-cue">▾ scroll to open more windows</div>
-    </div>
+      <div class="scroll-cue">
+        <div class="line"></div>SCROLL
+      </div>
+    </section>
 
     <!-- STACK -->
     <section id="stack">
       <div class="sec-head reveal">
-        <span class="sec-code">01 · CAPABILITIES</span>
-        <h2 class="sec-title display">What's installed.</h2>
-        <p class="sec-sub">Four toolchains, kept sharp enough to ship with any one of them.</p>
+        <div>
+          <span class="sec-code">01 — CAPABILITIES</span>
+          <h2 class="sec-title">Four disciplines,<br>one build.</h2>
+        </div>
+        <p class="sec-note">Most freelancers hand you off between specialists. I carry a project from interface to
+          database to app store.</p>
       </div>
 
-      <div class="window stack-window reveal">
-        <div class="winbar">
-          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-          <span class="wtitle">zsh — cat stack.json</span>
-          <span class="spacer"></span>
+      <div class="assemblies reveal">
+        <div class="assembly">
+          <span class="idx mono">ASM—01</span>
+          <h3 class="display">Frontend</h3>
+          <div class="sub">INTERFACE LAYER</div>
+          <ul>
+            <li>React &amp; Next.js</li>
+            <li>TypeScript</li>
+            <li>Bootstrap / Tailwind CSS</li>
+            <li>Livewire</li>
+            <li>Responsive, accessible UI</li>
+          </ul>
         </div>
-        <div class="win-body dark mono">
-          <div class="term-line" style="margin-bottom:18px;"><span class="term-prompt">➜</span><span> cat
-              stack.json</span></div>
-          <div class="stack-grid">
-            <div class="stack-block">
-              <div><span class="k">"frontend"</span><span class="b">: [</span></div>
-              <ul>
-                <li>React / Next.js</li>
-                <li>TypeScript</li>
-                <li>Bootstrap/Tailwind CSS</li>
-                <li>Livewire</li>
-              </ul>
-              <div class="b">]</div>
-            </div>
-            <div class="stack-block">
-              <div><span class="k">"backend"</span><span class="b">: [</span></div>
-              <ul>
-                <li>Laravel</li>
-                <li>PostgreSQL</li>
-                <li>Redis</li>
-                <li>Docker</li>
-                <li>REST Api</li>
-              </ul>
-              <div class="b">]</div>
-            </div>
-            <div class="stack-block">
-              <div><span class="k">"android"</span><span class="b">: [</span></div>
-              <ul>
-                <li>React Native</li>
-                <li>Firebase</li>
-                <li>Play Console</li>
-              </ul>
-              <div class="b">]</div>
-            </div>
-            <div class="stack-block">
-              <div><span class="k">"wordpress"</span><span class="b">: [</span></div>
-              <ul>
-                <li>Custom themes</li>
-                <li>WooCommerce</li>
-                <li>Elementor</li>
-              </ul>
-              <div class="b">]</div>
-            </div>
-          </div>
+        <div class="assembly">
+          <span class="idx mono">ASM—02</span>
+          <h3 class="display">Backend</h3>
+          <div class="sub">LOGIC &amp; DATA LAYER</div>
+          <ul>
+            <li>Laravel &amp; Express</li>
+            <li>PostgreSQL &amp; MySQL</li>
+            <li>Redis</li>
+            <li>Docker</li>
+            <li>REST APIs</li>
+            <li>Auth, queues, caching</li>
+          </ul>
+        </div>
+        <div class="assembly">
+          <span class="idx mono">ASM—03</span>
+          <h3 class="display">Android</h3>
+          <div class="sub">MOBILE LAYER</div>
+          <ul>
+            <li>React Native</li>
+            <li>Firebase</li>
+            <li>Play Store releases</li>
+            <li>REST/API integration</li>
+          </ul>
+        </div>
+        <div class="assembly">
+          <span class="idx mono">ASM—04</span>
+          <h3 class="display">WordPress</h3>
+          <div class="sub">CMS LAYER</div>
+          <ul>
+            <li>Custom themes</li>
+            <li>WooCommerce stores</li>
+            <li>Plugin development</li>
+            <li>Elementor builds</li>
+            <li>Migration &amp; speed fixes</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -965,62 +1152,76 @@
     <!-- SERVICES -->
     <section id="services">
       <div class="sec-head reveal">
-        <span class="sec-code">02 · SERVICES</span>
-        <h2 class="sec-title display">Launchpad</h2>
-        <p class="sec-sub">What you can hire me for </p>
+        <div>
+          <span class="sec-code">02 — SERVICES</span>
+          <h2 class="sec-title">What's on Offer.</h2>
+        </div>
+        <p class="sec-note">What you can hire me for. Eight services, each shippable on its own or bundled into one
+          build</p>
       </div>
 
-      <div class="window launchpad reveal">
-        <div class="winbar">
-          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-          <span class="wtitle">Launchpad — Services</span>
-          <span class="spacer"></span>
+      <div class="bom reveal">
+        <div class="bom-row head">
+          <div class="bom-cell">ITEM</div>
+          <div class="bom-cell">SERVICE</div>
+          <div class="bom-cell">SCOPE</div>
+          <div class="bom-cell">CATEGORY</div>
         </div>
-        <div class="win-body launchpad-bg">
-          <div class="launchpad-grid">
-            <div class="launch-item">
-              <div class="app-icon" style="background:linear-gradient(145deg,#FF7A57,#FF5A36);">W</div>
-              <div class="lname">Web Apps</div>
-              <div class="ldesc">Dashboards, portals &amp; SaaS tools — React/Next.js with a backend that holds up.
-              </div>
-            </div>
-            <div class="launch-item">
-              <div class="app-icon" style="background:linear-gradient(145deg,#57A0FF,#2F6FED);">E</div>
-              <div class="lname">E-Commerce</div>
-              <div class="ldesc">Product catalogs, checkout &amp; payments — WooCommerce, Shopify, or fully custom.
-              </div>
-            </div>
-            <div class="launch-item">
-              <div class="app-icon" style="background:linear-gradient(145deg,#3DD16B,#28C840);">M</div>
-              <div class="lname">Management Systems</div>
-              <div class="ldesc">Inventory, CRM &amp; internal tools that replace your spreadsheets.</div>
-            </div>
-            <div class="launch-item">
-              <div class="app-icon" style="background:linear-gradient(145deg,#FFCB57,#FFBD2E);">A</div>
-              <div class="lname">Android Apps</div>
-              <div class="ldesc">React Native — prototype through to a Play Store release.</div>
-            </div>
-            <div class="launch-item">
-              <div class="app-icon" style="background:linear-gradient(145deg,#B47CFF,#8A4FE0);">P</div>
-              <div class="lname">WordPress Sites</div>
-              <div class="ldesc">Custom themes, speed fixes &amp; WooCommerce builds that don't feel templated.</div>
-            </div>
-            <div class="launch-item">
-              <div class="app-icon" style="background:linear-gradient(145deg,#FF6BA6,#E0397A);">B</div>
-              <div class="lname">APIs &amp; Backend</div>
-              <div class="ldesc">REST Api services, auth &amp; integrations that hold up under load.</div>
-            </div>
-            <div class="launch-item">
-              <div class="app-icon" style="background:linear-gradient(145deg,#5FD1C9,#2AA79E);">C</div>
-              <div class="lname">Site Care</div>
-              <div class="ldesc">Ongoing updates, bug fixes &amp; monitoring for sites already live.</div>
-            </div>
-            <div class="launch-item">
-              <div class="app-icon" style="background:linear-gradient(145deg,#8C93A6,#5C6478);">S</div>
-              <div class="lname">Startup MVPs</div>
-              <div class="ldesc">A working first version, scoped tight enough to ship in weeks, not months.</div>
-            </div>
-          </div>
+        <div class="bom-row">
+          <div class="bom-cell"><span class="bom-item">01</span></div>
+          <div class="bom-cell"><span class="bom-name">Web Applications</span></div>
+          <div class="bom-cell"><span class="bom-desc">Custom dashboards, portals &amp; SaaS tools, front to
+              back.</span></div>
+          <div class="bom-cell"><span class="bom-tag">FULL STACK</span></div>
+        </div>
+        <div class="bom-row">
+          <div class="bom-cell"><span class="bom-item">02</span></div>
+          <div class="bom-cell"><span class="bom-name">E-Commerce Stores</span></div>
+          <div class="bom-cell"><span class="bom-desc">Catalogs, checkout &amp; payments — WooCommerce, Shopify, or
+              custom.</span></div>
+          <div class="bom-cell"><span class="bom-tag">WEB / WP</span></div>
+        </div>
+        <div class="bom-row">
+          <div class="bom-cell"><span class="bom-item">03</span></div>
+          <div class="bom-cell"><span class="bom-name">Management Systems</span></div>
+          <div class="bom-cell"><span class="bom-desc">Inventory, CRM &amp; internal tools that replace your
+              spreadsheets.</span></div>
+          <div class="bom-cell"><span class="bom-tag">BACKEND</span></div>
+        </div>
+        <div class="bom-row">
+          <div class="bom-cell"><span class="bom-item">04</span></div>
+          <div class="bom-cell"><span class="bom-name">Android Apps</span></div>
+          <div class="bom-cell"><span class="bom-desc">React Native apps, from prototype to Play Store
+              release.</span></div>
+          <div class="bom-cell"><span class="bom-tag">ANDROID</span></div>
+        </div>
+        <div class="bom-row">
+          <div class="bom-cell"><span class="bom-item">05</span></div>
+          <div class="bom-cell"><span class="bom-name">WordPress Sites</span></div>
+          <div class="bom-cell"><span class="bom-desc">Custom themes, speed fixes &amp; WooCommerce builds that don't
+              feel templated.</span></div>
+          <div class="bom-cell"><span class="bom-tag">WORDPRESS</span></div>
+        </div>
+        <div class="bom-row">
+          <div class="bom-cell"><span class="bom-item">06</span></div>
+          <div class="bom-cell"><span class="bom-name">APIs &amp; Backend</span></div>
+          <div class="bom-cell"><span class="bom-desc">REST Api services, auth &amp; integrations that hold up under
+              load.</span></div>
+          <div class="bom-cell"><span class="bom-tag">BACKEND</span></div>
+        </div>
+        <div class="bom-row">
+          <div class="bom-cell"><span class="bom-item">07</span></div>
+          <div class="bom-cell"><span class="bom-name">Site Care &amp; Maintenance</span></div>
+          <div class="bom-cell"><span class="bom-desc">Ongoing updates, bug fixes &amp; monitoring for sites already
+              live.</span></div>
+          <div class="bom-cell"><span class="bom-tag">SUPPORT</span></div>
+        </div>
+        <div class="bom-row">
+          <div class="bom-cell"><span class="bom-item">08</span></div>
+          <div class="bom-cell"><span class="bom-name">Startup MVPs</span></div>
+          <div class="bom-cell"><span class="bom-desc">A working first version, scoped tight enough to ship in weeks,
+              not months.</span></div>
+          <div class="bom-cell"><span class="bom-tag">FULL STACK</span></div>
         </div>
       </div>
     </section>
@@ -1028,209 +1229,270 @@
     <!-- BUILDS -->
     <section id="builds">
       <div class="sec-head reveal">
-        <span class="sec-code">03 · SELECTED WORK</span>
-        <h2 class="sec-title display">~/rejcent-builds</h2>
-        <!-- <p class="sec-sub">Five recent builds. File extension tells you which toolchain shipped it.</p> -->
+        <div>
+          <span class="sec-code">03 — SELECTED WORK</span>
+          <h2 class="sec-title">Recent Works.</h2>
+        </div>
+        <p class="sec-note">Recent projects, spanning all four disciplines. Details on request under NDA where
+          applicable.</p>
       </div>
 
-      <div class="window finder reveal">
-        <div class="winbar">
-          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-          <span class="wtitle">Finder — projects</span>
-          <span class="spacer"></span>
-        </div>
-        <div class="finder-toolbar">
-          <span>◧</span><span class="path">Macintosh HD / Users / bhaskar / projects</span>
-        </div>
-        <div class="files">
-          <div class="file">
-            <span class="fcat">WEB · FULL STACK</span>
-            <div class="fname">election management system</div>
-            <p>An end-to-end election management platform providing seamless electoral roll preparation, candidate
-              nomination, and vote counting for local body elections.</p>
-            <div class="ftags">
-              <span class="tag">Laravel</span>
-              <span class="tag">Postgres</span>
-              <span class="tag">Redis</span>
+      <div class="builds reveal">
+
+        <div class="build">
+          <div class="build-tag">
+            <span class="build-num mono">01</span>
+            <span class="build-cat">WEB · FULL STACK</span>
+          </div>
+          <div class="build-body">
+            <h3 class="display">Election Management System</h3>
+            <p>
+              An end-to-end election management platform providing seamless electoral roll preparation, candidate
+              nomination, and vote counting for local body elections.
+            </p>
+            <div class="stackline">
+              <span class="chip">Laravel</span>
+              <span class="chip">PostgreSQL</span>
+              <span class="chip">Redis</span>
             </div>
-            <!-- <div class="fmeta">
-              <span>2022-</span>
-              <a href="#">open →</a>
+            <!-- <div class="build-foot">
+              <span class="build-link">CASE NOTES →</span>
+              <span class="build-meta">CLIENT: RETAIL / 2025</span>
             </div> -->
           </div>
-          <div class="file">
-            <span class="fcat">WEB - WORDPRESS + LARAVEL</span>
-            <div class="fname">portfolio</div>
-            <p>Built a responsive portfolio website and a comprehensive employee leave management system to streamline
-              workforce management for a tea company. </p>
-            <div class="ftags">
-              <span class="tag">Wordpress</span>
-              <span class="tag">Laravel</span>
-              <span class="tag">MySQL</span>
-            </div>
-            <!-- <div class="fmeta"><span>2024</span><a href="#">open →</a></div> -->
+        </div>
+
+        <div class="build">
+          <div class="build-tag">
+            <span class="build-num mono">02</span>
+            <span class="build-cat">WORDPRESS · LARAVEL</span>
           </div>
-          <div class="file">
-            <span class="fcat">WEB - FULL STACK</span>
-            <div class="fname">alumni</div>
+          <div class="build-body">
+            <h3 class="display">Portfolio</h3>
+            <p>
+              Built a responsive portfolio website and a comprehensive employee leave management system to streamline
+              workforce management for a tea company.
+            </p>
+            <div class="stackline">
+              <span class="chip">Wordpress</span>
+              <span class="chip">Laravel</span>
+              <span class="chip">MySQL</span>
+            </div>
+            <!-- <div class="build-foot">
+              <span class="build-link">CASE NOTES →</span>
+              <span class="build-meta">PLAY STORE / 2024</span>
+            </div> -->
+          </div>
+        </div>
+
+        <div class="build">
+          <div class="build-tag">
+            <span class="build-num mono">03</span>
+            <span class="build-cat">WEB · FULL STACK</span>
+          </div>
+          <div class="build-body">
+            <h3 class="display">Alumni System</h3>
             <p>Scalable Alumni Management System for university/college/schools to streamline alumni registration,
               communication, event management, and record keeping.</p>
-            <div class="ftags">
-              <span class="tag">Laravel</span>
-              <span class="tag">React</span>
-              <span class="tag">MySQL</span>
+            <div class="stackline">
+              <span class="chip">React</span>
+              <span class="chip">Laravel</span>
+              <span class="chip">MySQL</span>
             </div>
-            <!-- <div class="fmeta"><span>2024</span><a href="#">open →</a></div> -->
+            <!-- <div class="build-foot">
+              <span class="build-link">CASE NOTES →</span>
+              <span class="build-meta">CLIENT: F&amp;B / 2024</span>
+            </div> -->
           </div>
-          <div class="file">
-            <span class="fcat">WEB - FULL STACK</span>
-            <div class="fname">smart assessment & rating system</div>
+        </div>
+
+        <div class="build">
+          <div class="build-tag">
+            <span class="build-num mono">04</span>
+            <span class="build-cat">WEB · FULL STACK</span>
+          </div>
+          <div class="build-body">
+            <h3 class="display">Smart Assessment & Rating System</h3>
             <p>
               A web-based assessment system where users complete customized questionnaires to receive automated ratings
               based on predefined evaluation criteria. Included a flexible admin panel for creating, editing, and
               managing dynamic forms and assessments.
             </p>
-            <div class="ftags">
-              <span class="tag">Livewire</span>
-              <span class="tag">MySQL</span>
+            <div class="stackline">
+              <span class="chip">Livewire</span>
             </div>
-            <!-- <div class="fmeta"><span>2023</span><a href="#">open →</a></div> -->
+            <!-- <div class="build-foot">
+              <span class="build-link">CASE NOTES →</span>
+              <span class="build-meta">CLIENT: FINTECH / 2023</span>
+            </div> -->
           </div>
-          <div class="file">
-            <span class="fcat">WORDPRESS</span>
-            <div class="fname">wordpress plugin</div>
+        </div>
+
+        <div class="build">
+          <div class="build-tag">
+            <span class="build-num mono">05</span>
+            <span class="build-cat">WORDPRESS</span>
+          </div>
+          <div class="build-body">
+            <h3 class="display">Wordpress Plugin</h3>
             <p>
               A performance-focused WordPress plugin that customizes REST API responses by exposing only
               administrator-selected fields. The plugin helps reduce bandwidth usage, simplifies frontend data handling,
               and enhances the performance of applications consuming WordPress APIs.
             </p>
-            <!-- <div class="ftags"><span class="tag">Next.js</span><span class="tag">Mapbox</span><span
-                class="tag">MongoDB</span></div>
-            <div class="fmeta"><span>2023</span><a href="#">open →</a></div> -->
-          </div>
-          <div class="file" style="display:flex;align-items:center;justify-content:center;">
-            <a href="#contact" class="btn ghost">+ New project</a>
+            <div class="stackline">
+              <span class="chip">PHP</span>
+            </div>
+            <!-- <div class="build-foot">
+              <span class="build-link">CASE NOTES →</span>
+              <span class="build-meta">CLIENT: REAL ESTATE / 2023</span>
+            </div> -->
           </div>
         </div>
+
       </div>
     </section>
 
     <!-- PROCESS -->
     <section id="process">
       <div class="sec-head reveal">
-        <span class="sec-code">04 · HOW IT RUNS</span>
-        <h2 class="sec-title display">./build.sh</h2>
-        <p class="sec-sub">Same four stages regardless of what we're building.</p>
+        <div>
+          <span class="sec-code">04 — HOW A PROJECT RUNS</span>
+          <h2 class="sec-title">Brief to shipped.</h2>
+        </div>
+        <p class="sec-note">Same four stages regardless of discipline — only the tools change.</p>
       </div>
 
-      <div class="window script-window reveal">
-        <div class="winbar">
-          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-          <span class="wtitle">bash — ./build.sh</span>
-          <span class="spacer"></span>
-        </div>
-        <div class="win-body dark mono">
-          <div class="script-line">
-            <span class="script-tag">[1/4]</span>
-            <span class="script-name">brief<span class="script-desc">Scope the problem and what "done" looks like, in
-                writing.</span></span>
-            <span class="script-status">done ✓</span>
+      <div class="ruler reveal">
+        <div class="ruler-line"></div>
+        <div class="ruler-steps">
+          <div class="rstep">
+            <span class="rnum mono">STAGE 01</span>
+            <h4 class="display">Brief</h4>
+            <p>We scope the problem, the users, and what "done" looks like — in writing, before any code.</p>
           </div>
-          <div class="script-line">
-            <span class="script-tag">[2/4]</span>
-            <span class="script-name">draft<span class="script-desc">Wireframes or an API contract — you see the shape
-                first.</span></span>
-            <span class="script-status">done ✓</span>
+          <div class="rstep">
+            <span class="rnum mono">STAGE 02</span>
+            <h4 class="display">Draft</h4>
+            <p>Wireframes or an API contract first. You see the shape of it before we commit to building it.</p>
           </div>
-          <div class="script-line">
-            <span class="script-tag">[3/4]</span>
-            <span class="script-name">build<span class="script-desc">Weekly check-ins and a staging link you can poke
-                at.</span></span>
-            <span class="script-status running">running…</span>
+          <div class="rstep">
+            <span class="rnum mono">STAGE 03</span>
+            <h4 class="display">Build</h4>
+            <p>Short weekly check-ins, a staging link you can poke at, and no silent three-week disappearances.</p>
           </div>
-          <div class="script-line">
-            <span class="script-tag">[4/4]</span>
-            <span class="script-name">ship<span class="script-desc">Deployed, documented, handed over with support
-                window.</span></span>
-            <span class="script-status queued">queued</span>
+          <div class="rstep">
+            <span class="rnum mono">STAGE 04</span>
+            <h4 class="display">Ship</h4>
+            <p>Deployed, documented, and handed over — plus a fixed window of post-launch support.</p>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- PRICING -->
+    <!-- <section id="pricing">
+      <div class="sec-head reveal">
+        <div>
+          <span class="sec-code">05 — RATE CARD</span>
+          <h2 class="sec-title">Pricing, roughly.</h2>
+        </div>
+        <p class="sec-note">Starting points, not fixed prices — every build is scoped and quoted individually.</p>
+      </div>
+
+      <div class="pricing-grid reveal">
+        <div class="price-card">
+          <span class="price-tier">TIER 01 — STARTER</span>
+          <h3 class="price-name">Single Feature</h3>
+          <div class="price-amount">$600<span class="unit">+ / project</span></div>
+          <p class="price-desc">A landing page, a small WordPress site, or a simple app MVP — one clear feature, done
+            properly.</p>
+          <ul class="price-list">
+            <li>1–2 pages or screens</li>
+            <li>Single platform</li>
+            <li>1 round of revisions</li>
+            <li>1–2 week turnaround</li>
+          </ul>
+          <a href="#contact" class="btn ghost price-cta">REQUEST A QUOTE</a>
+        </div>
+
+        <div class="price-card featured">
+          <span class="price-featured-tag">MOST BOOKED</span>
+          <span class="price-tier">TIER 02 — STANDARD</span>
+          <h3 class="price-name">Full Build</h3>
+          <div class="price-amount">$2,000<span class="unit">+ / project</span></div>
+          <p class="price-desc">A complete web app or online store — custom UI, database, and an admin panel behind it.
+          </p>
+          <ul class="price-list">
+            <li>Custom frontend &amp; backend</li>
+            <li>Admin dashboard</li>
+            <li>2 rounds of revisions</li>
+            <li>3–6 week turnaround</li>
+          </ul>
+          <a href="#contact" class="btn solid price-cta">REQUEST A QUOTE</a>
+        </div>
+
+        <div class="price-card">
+          <span class="price-tier">TIER 03 — FULL SYSTEM</span>
+          <h3 class="price-name">Multi-Platform</h3>
+          <div class="price-amount">$5,000<span class="unit">+ / project</span></div>
+          <p class="price-desc">Web, backend, and Android together — or a management system replacing several tools at
+            once.</p>
+          <ul class="price-list">
+            <li>Multi-platform build</li>
+            <li>Third-party integrations</li>
+            <li>QA pass before launch</li>
+            <li>Priority post-launch support</li>
+          </ul>
+          <a href="#contact" class="btn ghost price-cta">REQUEST A QUOTE</a>
+        </div>
+      </div>
+
+      <p class="pricing-note reveal">Need ongoing help instead of a one-off build? Maintenance &amp; support work is
+        billed hourly at $25–35/hr.<br>Final quotes depend on scope, timeline, and integrations — the numbers above are
+        a starting reference.</p>
+    </section> -->
+
     <!-- CONTACT -->
     <section id="contact">
-      <div class="sec-head reveal" style="text-align:center;">
-        <span class="sec-code">05 · GET IN TOUCH</span>
-        <h2 class="sec-title display">New Message</h2>
-        <p class="sec-sub" style="margin:12px auto 0;">Tell me what you're trying to ship.
-        </p>
-      </div>
-
-      <div class="window mail-window reveal">
-        <div class="winbar">
-          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-          <span class="wtitle">Mail — New Message</span>
-          <span class="spacer"></span>
+      <div class="contact-wrap">
+        <div class="contact-copy reveal">
+          <h2 class="display">Have a build<br>in mind?</h2>
+          <p>Tell me what you're trying to ship — a website, an app, a backend, or a WordPress rebuild.</p>
+          <a href="mailto:ibhaskargogoi@gmail.com" class="btn solid">EMAIL ME <span class="arrow">→</span></a>
         </div>
-        <div class="win-body">
-          <div class="mail-fields">
-            <div class="mail-field"><span class="flabel">To:</span><span class="fval">ibhaskargogoi@gmail.com</span>
+        <div class="reveal">
+          <div class="clist">
+            <div class="crow"><span>EMAIL</span><a href="mailto:ibhaskargogoi@gmail.com">ibhaskargogoi@gmail.com</a>
             </div>
-            <div class="mail-field"><span class="flabel">Subject:</span><span class="fval">Let's build something</span>
+            <!-- <div class="crow"><span>PHONE / WHATSAPP</span><a href="tel:+910000000000">+91 00000 00000</a></div> -->
+
+            <div class="crow"><span>LINKEDIN</span><a href="#" target="_blank"
+                rel="noopener">linkedin.com/in/bhaskarjyotigogoi</a></div>
+            <div class="crow"><span>LOCATION</span><span>India — Remote / IST</span></div>
+            <div class="crow"><span>AVAILABILITY</span><span style="color: #5fd297">● Open for freelance</span>
             </div>
           </div>
-          <p class="mail-body-text">Hi Bhaskar — I'm working on [web app / Android app / backend / WordPress site] and
-            could use your help with…</p>
-          <div class="mail-send">
-            <a href="mailto:ibhaskargogoi@gmail.com" class="btn solid">Send <span class="arrow">→</span></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="contact-rows reveal">
-        <!-- <div class="crow"><span class="clabel">PHONE / WHATSAPP</span><a href="tel:+910000000000">+91 00000 00000</a>
-        </div>
-        <div class="crow"><span class="clabel">GITHUB</span><a href="#" target="_blank"
-            rel="noopener">github.com/bhaskargogoi</a></div> -->
-        <div class="crow"><span class="clabel">LINKEDIN</span><a href="#" target="_blank"
-            rel="noopener">linkedin.com/in/bhaskarjyotigogoi</a></div>
-        <div class="crow">
-          <span class="clabel">STATUS</span>
-          <span style="color: #30a754">
-            ● Open for freelance
-            work
-          </span>
         </div>
       </div>
     </section>
 
   </main>
 
-  <div class="dock">
-    <a href="#stack" title="Stack">{ }</a>
-    <a href="#services" title="Services">▣</a>
-    <a href="#builds" title="Builds">▦</a>
-    <a href="#process" title="Process">▹</a>
-    <a href="#contact" title="Contact">✉</a>
-  </div>
-
-  <footer>© 2026 BHASKAR GOGOI — LAST LOGIN: TODAY</footer>
+  <footer class="wrap">
+    <span>© 2026 BHASKAR GOGOI.</span>
+    <span>SHEET 01/01 — REV C — BUILT WITH CARE</span>
+  </footer>
 
   <script>
+    // scroll reveal
     const revealEls = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
     revealEls.forEach(el => io.observe(el));
-
-    function tick() {
-      const d = new Date();
-      const h = String(d.getHours()).padStart(2, '0');
-      const m = String(d.getMinutes()).padStart(2, '0');
-      document.getElementById('clock').textContent = h + ':' + m;
-    }
-    tick(); setInterval(tick, 30000);
   </script>
 
 </body>
