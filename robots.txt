@@ -1,0 +1,7 @@
+# robots.txt for https://bhaskargogoi.com/
+# Single-page portfolio site — everything is open to crawl.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://bhaskargogoi.com/sitemap.xml
