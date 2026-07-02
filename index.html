@@ -32,15 +32,47 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Bhaskar Gogoi",
-    "jobTitle": "Freelance Software Developer",
-    "url": "https://bhaskargogoi.com/",
-    "sameAs": [
-      "https://linkedin.com/in/bhaskarjyotigogoi"
-    ],
-    "knowsAbout": ["Web Development", "Android Development", "Backend Development", "WordPress Development", "E-commerce Development"],
-    "email": "mailto:ibhaskargogoi@gmail.com"
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://bhaskargogoi.com/",
+        "name": "Bhaskar Gogoi",
+        "jobTitle": "Freelance Software Developer",
+        "url": "https://bhaskargogoi.com/",
+        "email": "mailto:ibhaskargogoi@gmail.com",
+        "sameAs": [
+          "https://linkedin.com/in/bhaskarjyotigogoi",
+          "https://www.instagram.com/ibhaskargogoi/",
+        ],
+        "knowsAbout": [
+          "Web Development",
+          "Android Development",
+          "Backend Development",
+          "WordPress Development",
+          "E-commerce Development"
+        ],
+        "worksFor": { "@id": "https://bhaskargogoi.com/#stack" }
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://bhaskargogoi.com/#stack",
+        "name": "Bhaskar Gogoi — Freelance Software Development",
+        "url": "https://bhaskargogoi.com/",
+        "image": "https://bhaskargogoi.com/images/og-image.png",
+        "description": "Freelance software development services: web apps, Android apps, backend systems, e-commerce stores, and WordPress sites for startups and small businesses.",
+        "founder": { "@id": "https://bhaskargogoi.com/" },
+        "email": "ibhaskargogoi@gmail.com",
+        "areaServed": "Worldwide",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://linkedin.com/in/bhaskarjyotigogoi",
+          "https://www.instagram.com/ibhaskargogoi/",
+        ],
+      }
+    ]
   }
 </script>
 
